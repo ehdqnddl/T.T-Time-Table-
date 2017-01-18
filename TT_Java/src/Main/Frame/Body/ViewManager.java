@@ -26,7 +26,7 @@ public class ViewManager extends JPanel {
 		tabBar.setForeground(new Color(214, 214, 214));
 		
 		cHomeView = new HomeView();
-		tabBar.add(cHomeView,"Campus         ");
+		tabBar.add(cHomeView,"Main         ");
 		
 		cCampus = new CampusView();
 		tabBar.add(cCampus,"Campus         ");
