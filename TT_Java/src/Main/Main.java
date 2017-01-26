@@ -13,12 +13,14 @@ public class Main {
 	//public - 객체가 선언되면 어디에서든 접근가능, 안정성이 떨어짐
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		
-		//java에서 프린트 함수, c언어에서는 printf랑 비슷함
-		System.out.println("print 함수");
-		
-		MainFrame mainFrame = new MainFrame();
 
+		
+		MainFrame mainFrame = null;
+		System.out.println("프로그램이 실행됩니다.");
+		mainFrame = new MainFrame();
+		if(mainFrame == null) {
+			System.out.println("프로그램이 실행되지 않았습니다.");
+		}
 	}
 
 }

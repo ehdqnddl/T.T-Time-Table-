@@ -1,8 +1,8 @@
 package Main.Frame;
 
+
 import GlobalValue.GlobalValue;
 import java.awt.*;
-import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseListener;
@@ -10,6 +10,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.Font;
+import java.io.*;
 
 import javax.swing.*;
 // java.awt 랑 javax.swing은 그래픽 라이브러리
@@ -97,11 +98,54 @@ public class MainFrame extends JFrame implements ActionListener,MouseListener{
 	}
 	public void actionPerformed(ActionEvent event) {
 		Input_ID = TextField_ID.getText();
-		System.out.println(Input_ID);
 		Input_Password = TextField_Password.getText();
-		System.out.println(Input_Password);
-		
-		//이부분에 로그인인증알고리즘을 추가요망.
+		int check = 0;
+		try {
+			BufferedReader idpw = new BufferedReader(new FileReader("idpw.txt"));
+			String temp;
+			while((temp = idpw.readLine()) != null) {
+				String[] split = temp.split(" ");
+				if(split[0].equals(Input_ID) && split[1].equals(Input_Password))
+				{
+					System.out.println(Input_ID+" 사용자가 로그인했습니다.");
+					check = 1;
+					break;
+				}
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(check == 0)
+		{
+			JOptionPane.showMessageDialog(this, "아아디 / 비밀번호를 확인해주세요.");
+		}
+		if(check == 1)
+		{
+			File dir = new File("user/"+Input_ID);
+			File dir_data = new File(dir+"/data");
+			File dir_memo = new File(dir_data + "/memo");
+			File dir_image = new File(dir_data + "/image");
+			if(!dir.exists()) {
+				dir.mkdirs();
+			}
+			if(!dir_data.exists()) {
+				dir_data.mkdirs();
+			}
+			if(!dir_memo.exists()) {
+				dir_memo.mkdirs();
+			}
+			if(!dir_image.exists()) {
+				dir_image.mkdirs();
+			}
+			JOptionPane.showMessageDialog(this, "로그인 확인. 프로그램을 실행합니다.");
+		}
+		//윗부분에 로그인인증알고리즘을 추가요망.
+		TextField_ID.setText(null);
+		TextField_Password.setText(null);
 	}
 	public void mouseDragged(MouseEvent event) {}
 	public void mouseMoved(MouseEvent event) {}
@@ -109,9 +153,7 @@ public class MainFrame extends JFrame implements ActionListener,MouseListener{
 	public void mouseReleased(MouseEvent event) {}
 	public void mouseEntered(MouseEvent event) {}
 	public void mouseExited(MouseEvent event) {}
-	public void mouseClicked(MouseEvent event) {
-		TextField_ID.setText(null);
-	}
+	public void mouseClicked(MouseEvent event) {}
 
 	
 }

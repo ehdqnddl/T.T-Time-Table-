@@ -22,6 +22,8 @@ public class MainFrame extends JFrame {
 		this.setPreferredSize(new Dimension(GlobalValue.nFrameWidth,GlobalValue.nFrameHeight));
 		//Frame의 배경색을 지정
 		this.setBackground(Color.black);
+		//Frame크기를 고정
+		this.setResizable(false);
 		//Frame을 보이게함
 		this.setVisible(true);
 		//프로그램 닫기를 누르면 프로그램을 종료시킴
